@@ -1,0 +1,72 @@
+{
+  "info": {
+    "name": "Feedback App API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "enabled": true
+    },
+    {
+      "key": "email",
+      "value": "john@example.com",
+      "enabled": true
+    }
+  ],
+  "item": [
+    {
+      "name": "Submit Feedback",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"message\": \"Your platform looks great!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/feedback",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "feedback"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Feedback",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/feedback",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "feedback"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Feedback by Email",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/feedback/email?email={{email}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "feedback", "email"],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

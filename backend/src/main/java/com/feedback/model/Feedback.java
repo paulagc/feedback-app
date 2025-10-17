@@ -2,6 +2,7 @@ package com.feedback.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Feedback {
@@ -9,12 +10,23 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     @Email
     private String email;
 
+    @NotBlank
     private String message;
+
+    public Feedback() {}
+
+    public Feedback(String name, String email, String message) {
+        this.name = name;
+        this.email = email;
+        this.message = message;
+    }
 
     public Long getId() {
         return id;

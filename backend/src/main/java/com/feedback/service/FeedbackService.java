@@ -21,4 +21,8 @@ public class FeedbackService {
     public List<Feedback> getAllFeedback() {
         return repository.findAll();
     }
+
+    public List<Feedback> getFeedbackByEmail(String email) {
+        return repository.findByEmail(email);
+    }
 }

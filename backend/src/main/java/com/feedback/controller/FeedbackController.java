@@ -52,4 +52,18 @@ public class FeedbackController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Could not retrieve feedback messages, please try again later.");
         }
     }
+
+    @GetMapping("/email")
+    public ResponseEntity<?> getFeedbackByEmail(@RequestParam String email) {
+        log.info("Retrieving feedback messages for email ****");
+        try {
+            List<Feedback> feedbackList = service.getFeedbackByEmail(email);
+            log.info("Retrieved {} feedback entries for email ****", feedbackList.size());
+            return ResponseEntity.ok(feedbackList);
+        } catch (Exception e) {
+            log.error("Error while retrieving feedback messages for email ****: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Could not retrieve feedback messages by email, please try again later.");
+        }
+    }
+
 }

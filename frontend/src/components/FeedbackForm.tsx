@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import "./FeedbackForm.css";
+import React, {FC, useEffect, useState} from "react";
+import "./Feedback.css";
 import {submitFeedback} from "../api/feedbackAPI";
 
 const enum serverStatus {
@@ -8,7 +8,7 @@ const enum serverStatus {
     success,
 }
 
-const FeedbackForm = () => {
+const FeedbackForm: FC<{ onSubmitted?: () => void }> = ({onSubmitted}) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -25,6 +25,7 @@ const FeedbackForm = () => {
         try {
             await submitFeedback({name, email, message});
             setSubmitStatus(serverStatus.success);
+            onSubmitted && onSubmitted();
             resetFields();
         } catch {
             setSubmitStatus(serverStatus.failure);
@@ -42,6 +43,7 @@ const FeedbackForm = () => {
 
     return (
         <div className="form-container">
+            <h2>Feedback Form</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:
@@ -49,7 +51,8 @@ const FeedbackForm = () => {
                 </label>
                 <label>
                     E-mail:
-                    <input type="email" name="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                    <input type="email" name="E-mail" value={email} onChange={(e) => setEmail(e.target.value)}
+                           required/>
                 </label>
                 <label>
                     Feedback message:

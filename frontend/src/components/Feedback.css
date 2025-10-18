@@ -1,8 +1,16 @@
+.page-container {
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    flex-direction: column;
 }
 
 form {
@@ -38,4 +46,8 @@ button {
     z-index: 100;
     padding: 2rem 2rem;
     background-color: lightgray;
+}
+
+li {
+    margin-top: 1rem;
 }

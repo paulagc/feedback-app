@@ -1,7 +1,73 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import "./FeedbackForm.css";
+import {submitFeedback} from "../api/feedbackAPI";
+
+const enum serverStatus {
+    idle,
+    failure,
+    success,
+}
 
 const FeedbackForm = () => {
-    return  <div>hello feedback form</div>
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [submitStatus, setSubmitStatus] = useState<serverStatus>(serverStatus.idle);
+
+    const resetFields = () => {
+        setName("");
+        setEmail("");
+        setMessage("");
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await submitFeedback({name, email, message});
+            setSubmitStatus(serverStatus.success);
+            resetFields();
+        } catch {
+            setSubmitStatus(serverStatus.failure);
+        }
+    }
+
+    const closePopup = () => {
+        setSubmitStatus(serverStatus.idle);
+    }
+
+    useEffect(() => {
+        const timer = setTimeout(closePopup, 5000);
+        return () => clearTimeout(timer);
+    }, [submitStatus]);
+
+    return (
+        <div className="form-container">
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Name:
+                    <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)}/>
+                </label>
+                <label>
+                    E-mail:
+                    <input type="email" name="E-mail" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                </label>
+                <label>
+                    Feedback message:
+                    <textarea name="message" value={message} onChange={(e) => setMessage(e.target.value)}/>
+                </label>
+                <button>
+                    Submit
+                </button>
+            </form>
+            {
+                submitStatus !== serverStatus.idle && (
+                    <div className="popup">
+                        {submitStatus === serverStatus.success ? "Feedback saved successfully" : "Feedback submit failed, please try again"}
+                    </div>
+                )
+            }
+        </div>
+    );
 };
 
 export default FeedbackForm;

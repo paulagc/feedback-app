@@ -45,15 +45,15 @@ const FeedbackForm = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:
-                    <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)}/>
+                    <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} required/>
                 </label>
                 <label>
                     E-mail:
-                    <input type="email" name="E-mail" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="email" name="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </label>
                 <label>
                     Feedback message:
-                    <textarea name="message" value={message} onChange={(e) => setMessage(e.target.value)}/>
+                    <textarea name="message" value={message} onChange={(e) => setMessage(e.target.value)} required/>
                 </label>
                 <button>
                     Submit

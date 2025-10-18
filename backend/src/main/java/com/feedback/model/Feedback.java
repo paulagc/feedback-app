@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Feedback {
     @Id
@@ -19,6 +21,8 @@ public class Feedback {
 
     @NotBlank
     private String message;
+
+    private LocalDateTime created;
 
     public Feedback() {}
 
@@ -58,5 +62,14 @@ public class Feedback {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.created = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
     }
 }

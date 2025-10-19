@@ -50,4 +50,11 @@ Navigate to the /frontend folder and run ``npm test``.
 - Loading animation for API calls.
 - Global state management with context or Redux for example.
 - Responsive design
+
+### Others
+
+- Deploy to cloud: AWS, Azure...
+- Configure pipeline to run tests automatically
+- Multilanguage support
+- Export data
   

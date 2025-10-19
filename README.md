@@ -26,3 +26,28 @@ Navigate to the /backend folder and run ``mvn test``.
 
 ### Frontend 
 Navigate to the /frontend folder and run ``npm test``.
+
+## Future improvements and ideas
+
+### Backend
+
+- Hide sensitive data in a better way than just hardcoded "*".
+- More testing. For example some end to end tests that run on real HTTP port.
+- More filters to get the feedback list, for example sorting by created time, searching, pagination...
+- Using a real database
+- User authentication to allow users to edit or delete feedback.
+- Spam protection for the form.
+
+### Frontend
+
+- Accessibility.
+- Styling: better CSS rules, some library like styled components etc.
+- Form validation: character limit for the text area, email regex validation etc.
+- Env files for things like hardcoded urls and others.
+- Proper CORS handling other than using localhost.
+- Configure forms autocomplete.
+- More testing: validation of fields, resetting values, feedback list...
+- Loading animation for API calls.
+- Global state management with context or Redux for example.
+- Responsive design
+  
